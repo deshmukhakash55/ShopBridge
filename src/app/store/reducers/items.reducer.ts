@@ -135,8 +135,8 @@ export const itemsReducer = createReducer(
 		(state: ItemsState, addItemSuccessPayload: AddItemSuccessPayload) => ({
 			...state,
 			items: [
-				...state.items,
-				{ id: uniqueId++, ...addItemSuccessPayload }
+				{ id: uniqueId++, ...addItemSuccessPayload },
+				...state.items
 			],
 			isAddItemSuccess: true,
 			isAddItemFailure: false,
