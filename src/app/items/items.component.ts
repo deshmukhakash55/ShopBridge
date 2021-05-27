@@ -1,4 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 import { Item } from '../item.types';
 import {
 	deleteItemProgress, deleteItemStart
@@ -7,6 +8,7 @@ import {
 	allItemsSelector, editItemIdSelector
 } from '../store/selectors/items.selector';
 import { ItemsDataSource } from './items-datasource';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -33,7 +35,7 @@ export class ItemsComponent implements AfterViewInit, OnInit {
 	public deleteNoteIdSource: Observable<number>;
 	public dataSource: ItemsDataSource;
 	public dataLength: number;
-	public readonly displayedColumns = [
+	public displayedColumns = [
 		'image',
 		'name',
 		'description',
@@ -42,10 +44,17 @@ export class ItemsComponent implements AfterViewInit, OnInit {
 		'createdDate'
 	];
 
-	constructor(private store: Store, private matDialog: MatDialog) {}
+	public isHandset: Observable<boolean>;
+
+	constructor(
+		private store: Store,
+		private matDialog: MatDialog,
+		private breakpointObserver: BreakpointObserver
+	) {}
 
 	public ngOnInit(): void {
 		this.initializeSources();
+		this.initializeIsHandsetObservable();
 	}
 
 	private initializeSources(): void {
@@ -55,6 +64,34 @@ export class ItemsComponent implements AfterViewInit, OnInit {
 		});
 		this.editNoteIdSource = this.store.select(editItemIdSelector);
 		this.deleteNoteIdSource = this.store.select(editItemIdSelector);
+	}
+
+	private initializeIsHandsetObservable(): void {
+		this.isHandset = this.breakpointObserver
+			.observe(Breakpoints.Handset)
+			.pipe(
+				map((result) => result.matches),
+				shareReplay()
+			);
+		this.isHandset.subscribe((isDeviceHandset: boolean) => {
+			if (isDeviceHandset) {
+				this.displayedColumns = [
+					'name',
+					'description',
+					'price',
+					'actions'
+				];
+			} else {
+				this.displayedColumns = [
+					'image',
+					'name',
+					'description',
+					'price',
+					'actions',
+					'createdDate'
+				];
+			}
+		});
 	}
 
 	public ngAfterViewInit(): void {

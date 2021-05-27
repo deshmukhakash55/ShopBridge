@@ -66,7 +66,7 @@
 					${{ row.price }} /-
 				</td>
 			</ng-container>
-			<ng-container matColumnDef="image">
+			<ng-container *ngIf="!(isHandset | async)" matColumnDef="image">
 				<th mat-header-cell class="center-align" *matHeaderCellDef>
 					Image
 				</th>
@@ -96,7 +96,10 @@
 					</button>
 				</td>
 			</ng-container>
-			<ng-container matColumnDef="createdDate">
+			<ng-container
+				*ngIf="!(isHandset | async)"
+				matColumnDef="createdDate"
+			>
 				<th
 					mat-header-cell
 					class="center-align"
