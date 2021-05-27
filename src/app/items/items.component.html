@@ -1,0 +1,152 @@
+<div class="items">
+	<div class="items-label"><h1>Items</h1></div>
+	<div class="mat-elevation-z8 items__table-host">
+		<table
+			mat-table
+			[dataSource]="dataSource"
+			class="full-width-table"
+			matSort
+			aria-label="Elements"
+		>
+			<ng-container matColumnDef="name">
+				<th
+					mat-header-cell
+					class="center-align"
+					*matHeaderCellDef
+					mat-sort-header
+				>
+					Name
+				</th>
+				<td
+					mat-cell
+					class="center-align"
+					[class.process-progress]="
+						(editNoteIdSource | async) === row.id ||
+						(deleteNoteIdSource | async) === row.id
+					"
+					*matCellDef="let row"
+				>
+					{{ row.name }}
+				</td>
+			</ng-container>
+			<ng-container matColumnDef="description">
+				<th mat-header-cell class="center-align" *matHeaderCellDef>
+					Description
+				</th>
+				<td
+					mat-cell
+					class="center-align"
+					[class.process-progress]="
+						(editNoteIdSource | async) === row.id ||
+						(deleteNoteIdSource | async) === row.id
+					"
+					*matCellDef="let row"
+				>
+					{{ row.description }}
+				</td>
+			</ng-container>
+			<ng-container matColumnDef="price">
+				<th
+					mat-header-cell
+					class="center-align"
+					*matHeaderCellDef
+					mat-sort-header
+				>
+					Price
+				</th>
+				<td
+					mat-cell
+					class="center-align"
+					[class.process-progress]="
+						(editNoteIdSource | async) === row.id ||
+						(deleteNoteIdSource | async) === row.id
+					"
+					*matCellDef="let row"
+				>
+					${{ row.price }} /-
+				</td>
+			</ng-container>
+			<ng-container matColumnDef="image">
+				<th mat-header-cell class="center-align" *matHeaderCellDef>
+					Image
+				</th>
+				<td mat-cell class="center-align" *matCellDef="let row">
+					<img
+						class="list-image"
+						[src]="row.image"
+						alt="product-image"
+					/>
+				</td>
+			</ng-container>
+			<ng-container matColumnDef="actions">
+				<th mat-header-cell class="center-align" *matHeaderCellDef>
+					Actions
+				</th>
+				<td mat-cell class="center-align" *matCellDef="let row">
+					<button
+						[disabled]="
+							(editNoteIdSource | async) === row.id ||
+							(deleteNoteIdSource | async) === row.id
+						"
+						mat-button
+						[matMenuTriggerFor]="menu"
+						[matMenuTriggerData]="{ item: row }"
+					>
+						<mat-icon>more_horiz</mat-icon>
+					</button>
+				</td>
+			</ng-container>
+			<ng-container matColumnDef="createdDate">
+				<th
+					mat-header-cell
+					class="center-align"
+					*matHeaderCellDef
+					mat-sort-header
+				>
+					Created Date (dd/mm/yyyy)
+				</th>
+				<td
+					mat-cell
+					class="center-align"
+					[class.process-progress]="
+						(editNoteIdSource | async) === row.id ||
+						(deleteNoteIdSource | async) === row.id
+					"
+					*matCellDef="let row"
+				>
+					{{ row.createdDate | humanize }}
+				</td>
+			</ng-container>
+			<tr
+				mat-header-row
+				class="wrap-content"
+				*matHeaderRowDef="displayedColumns"
+			></tr>
+			<tr
+				mat-row
+				class="wrap-content"
+				*matRowDef="let row; columns: displayedColumns"
+			></tr>
+		</table>
+
+		<mat-paginator
+			#paginator
+			[length]="dataLength"
+			[pageIndex]="0"
+			[pageSize]="25"
+			[pageSizeOptions]="[25, 50, 100, 250]"
+		>
+		</mat-paginator>
+	</div>
+</div>
+
+<mat-menu #menu="matMenu">
+	<ng-template matMenuContent let-item="item">
+		<button mat-menu-item (click)="openEditItemModal(item)">
+			<mat-icon>edit</mat-icon>Edit
+		</button>
+		<button mat-menu-item (click)="deleteItem(item.id)">
+			<mat-icon>delete</mat-icon>Delete
+		</button>
+	</ng-template>
+</mat-menu>

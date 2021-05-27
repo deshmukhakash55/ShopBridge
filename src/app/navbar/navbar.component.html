@@ -1,0 +1,84 @@
+<mat-sidenav-container class="sidenav-container">
+	<mat-sidenav
+		#drawer
+		class="sidenav"
+		fixedInViewport
+		[class.hide]="(isHandset | async) === false"
+		[attr.role]="(isHandset | async) ? 'dialog' : 'navigation'"
+		[mode]="(isHandset | async) ? 'over' : 'side'"
+		[opened]="(isHandset | async) === false"
+	>
+		<mat-toolbar>Menu</mat-toolbar>
+		<mat-nav-list>
+			<a
+				mat-list-item
+				class="navbar__drawer-link"
+				routerLink="add"
+				(click)="drawer.toggle()"
+			>
+				<mat-icon aria-hidden="false" aria-label="Example home icon">
+					edit
+				</mat-icon>
+				Add New Item
+			</a>
+			<a
+				mat-list-item
+				class="navbar__drawer-link"
+				routerLink="items"
+				(click)="drawer.toggle()"
+			>
+				<mat-icon aria-hidden="false" aria-label="Example home icon">
+					list
+				</mat-icon>
+				See Items List
+			</a>
+		</mat-nav-list>
+	</mat-sidenav>
+	<mat-sidenav-content>
+		<mat-toolbar class="navbar__toolbar" color="primary">
+			<div class="logo-and-menu">
+				<button
+					type="button"
+					aria-label="Toggle sidenav"
+					mat-icon-button
+					(click)="drawer.toggle()"
+					*ngIf="isHandset | async"
+				>
+					<mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+				</button>
+				<span>ShopBridge</span>
+			</div>
+			<div *ngIf="!(isHandset | async)" class="navbar__links">
+				<mat-nav-list class="navbar__links-list">
+					<a
+						matTooltip="Create New Item"
+						mat-list-item
+						class="navbar__link"
+						routerLink="add"
+					>
+						<mat-icon
+							aria-hidden="false"
+							aria-label="Example home icon"
+						>
+							edit
+						</mat-icon>
+					</a>
+					<a
+						matTooltip="Items list"
+						mat-list-item
+						class="navbar__link"
+						routerLink="items"
+					>
+						<mat-icon
+							aria-hidden="false"
+							aria-label="Example home icon"
+						>
+							list
+						</mat-icon>
+					</a>
+				</mat-nav-list>
+			</div>
+		</mat-toolbar>
+		<ng-content></ng-content>
+	</mat-sidenav-content>
+</mat-sidenav-container>

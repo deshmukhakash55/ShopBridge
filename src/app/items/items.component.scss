@@ -1,0 +1,58 @@
+.full-width-table {
+	width: 100%;
+}
+
+.list-image {
+	height: 2em;
+	width: 2em;
+	border-radius: 2em;
+	border: 1px solid #737373;
+}
+
+.items {
+	display: flex;
+	flex-direction: column;
+
+	&-label {
+		margin: 1em auto;
+		width: 75%;
+		text-align: center;
+		border-bottom: 1px solid #535353;
+	}
+
+	&__table-host {
+		width: 75%;
+		margin: auto;
+	}
+
+	@media (max-width: 750px) {
+		&__table-host {
+			width: 100%;
+		}
+	}
+
+	&__row-actions-dropdown-icon {
+		margin-right: 5px;
+	}
+}
+
+.center-align {
+	text-align: center;
+	padding: 1em;
+	overflow-x: hidden;
+	overflow-wrap: anywhere;
+}
+
+.process-progress {
+	color: #757474;
+}
+
+::ng-deep .mat-sort-header-container {
+	display: flex;
+	justify-content: center;
+}
+
+.wrap-content {
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+}

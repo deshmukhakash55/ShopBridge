@@ -1,0 +1,97 @@
+<h2 mat-dialog-title>
+	<div class="edit-item-modal__title">
+		<mat-icon>edit</mat-icon><span>Edit Item</span>
+	</div>
+</h2>
+<mat-dialog-content>
+	<div class="edit-item-modal">
+		<form [formGroup]="editFormGroup">
+			<mat-form-field
+				class="edit-item-modal__form-field"
+				appearance="outline"
+			>
+				<mat-label>Name</mat-label>
+				<input
+					matInput
+					name="name"
+					placeholder="Item name..."
+					formControlName="name"
+					[errorStateMatcher]="formErrorStateMatcher"
+				/>
+				<mat-error
+					*ngIf="shouldShowErrorFor(editFormGroup.controls.name)"
+					>{{ getNameError() }}</mat-error
+				>
+			</mat-form-field>
+			<mat-form-field
+				class="edit-item-modal__form-field"
+				appearance="outline"
+			>
+				<mat-label>Description</mat-label>
+				<textarea
+					matInput
+					name="description"
+					placeholder="Item description..."
+					rows="5"
+					formControlName="description"
+					[errorStateMatcher]="formErrorStateMatcher"
+				></textarea>
+				<mat-error
+					*ngIf="
+						shouldShowErrorFor(editFormGroup.controls.description)
+					"
+					>{{ getDescriptionError() }}</mat-error
+				>
+			</mat-form-field>
+			<mat-form-field
+				class="edit-item-modal__form-field"
+				appearance="outline"
+			>
+				<mat-label>Price</mat-label>
+				<input
+					matInput
+					name="price"
+					type="number"
+					formControlName="price"
+					placeholder="Item price..."
+					[errorStateMatcher]="formErrorStateMatcher"
+				/>
+				<mat-error
+					*ngIf="shouldShowErrorFor(editFormGroup.controls.price)"
+					>{{ getPriceError() }}</mat-error
+				>
+			</mat-form-field>
+			<div class="edit-item-modal__file-input-block">
+				<input
+					class="edit-item-modal__file-input"
+					type="file"
+					(change)="updateItemImage($event)"
+				/>
+				<img
+					class="edit-item-modal__file-input-image"
+					alt="item-image"
+					[src]="editFormGroup.controls.image.value"
+				/>
+			</div>
+			<mat-error
+				*ngIf="shouldShowErrorFor(editFormGroup.controls.image)"
+				>{{ getImageUploadError() }}</mat-error
+			>
+		</form>
+	</div>
+</mat-dialog-content>
+<mat-dialog-actions class="edit-item-modal__actions">
+	<button mat-button mat-dialog-close>Cancel</button>
+	<span
+		[matTooltip]="getLatestFormErrorForTooltip()"
+		matTooltipPosition="above"
+	>
+		<button
+			mat-button
+			[disabled]="shouldDisableAddButton()"
+			(click)="saveAndCloseModal()"
+		>
+			Save
+		</button></span
+	>
+</mat-dialog-actions>

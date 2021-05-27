@@ -1,0 +1,107 @@
+<div class="add-item-form-host">
+	<mat-card>
+		<mat-card-title class="add-item-form__title"
+			>Add New Item</mat-card-title
+		>
+		<mat-card-content>
+			<div class="add-item-form">
+				<form [formGroup]="addItemFormGroup">
+					<mat-form-field
+						class="add-item-form__form-field"
+						appearance="outline"
+					>
+						<mat-label>Name</mat-label>
+						<input
+							matInput
+							name="name"
+							placeholder="Item name..."
+							formControlName="name"
+							[errorStateMatcher]="formErrorStateMatcher"
+						/>
+						<mat-error
+							*ngIf="
+								shouldShowErrorFor(
+									addItemFormGroup.controls.name
+								)
+							"
+							>{{ getNameError() }}</mat-error
+						>
+					</mat-form-field>
+					<mat-form-field
+						class="add-item-form__form-field"
+						appearance="outline"
+					>
+						<mat-label>Description</mat-label>
+						<textarea
+							matInput
+							name="description"
+							placeholder="Item description..."
+							rows="5"
+							formControlName="description"
+							[errorStateMatcher]="formErrorStateMatcher"
+						></textarea>
+						<mat-error
+							*ngIf="
+								shouldShowErrorFor(
+									addItemFormGroup.controls.description
+								)
+							"
+							>{{ getDescriptionError() }}</mat-error
+						>
+					</mat-form-field>
+					<mat-form-field
+						class="add-item-form__form-field"
+						appearance="outline"
+					>
+						<mat-label>Price</mat-label>
+						<input
+							matInput
+							name="price"
+							type="number"
+							formControlName="price"
+							placeholder="Item price..."
+							[errorStateMatcher]="formErrorStateMatcher"
+						/>
+						<mat-error
+							*ngIf="
+								shouldShowErrorFor(
+									addItemFormGroup.controls.price
+								)
+							"
+							>{{ getPriceError() }}</mat-error
+						>
+					</mat-form-field>
+					<div class="add-item-form__file-input-block">
+						<input
+							#itemImage
+							class="add-item-form__file-input"
+							type="file"
+							(change)="updateItemImage($event)"
+						/>
+						<img
+							*ngIf="!!addItemFormGroup.controls.image.value"
+							class="add-item-form__file-input-image"
+							alt="item-image"
+							[src]="addItemFormGroup.controls.image.value"
+						/>
+					</div>
+				</form>
+			</div>
+		</mat-card-content>
+		<mat-card-actions class="add-item-form__actions">
+			<button mat-button (click)="resetForm()">Clear</button>
+			<span
+				[matTooltip]="getLatestFormErrorForTooltip()"
+				matTooltipPosition="above"
+			>
+				<button
+					mat-button
+					(click)="addItem()"
+					[disabled]="shouldDisableAddButton()"
+				>
+					Add
+				</button></span
+			>
+		</mat-card-actions>
+	</mat-card>
+</div>
