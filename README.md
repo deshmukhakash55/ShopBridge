@@ -1,27 +1,66 @@
 # ShopBridge
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.7.
+ShopBridge is basic admin portal of e-commerce website to add, delete and edit the items.
 
-## Development server
+## For Demo, please visit:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+https://shopbridge-34679.web.app
 
-## Code scaffolding
+ShopBridge uses following tech tack and tools :
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Frontend techs:
 
-## Build
+-   Angular
+-   Angular Material
+-   Ngrx
+-   SCSS
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### How to deploy the application
 
-## Running unit tests
+1. Open the system terminal.
+2. Clone the git repository by executing following command in terminal <br />
+   `git clone https://github.com/deshmukhakash55/ShopBridge.git`
+3. Install the dependencies for project by executing following command in terminal <br />
+   `npm ci`
+4. Start the project at local server by executing following command in terminal <br />
+   `ng serve`
+5. Open the following link in browser <br />
+   `http://localhost:4200`
+6. Once the project opens on local server. You can play around with it :) <br />
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Time spent on different development aspects.
 
-## Running end-to-end tests
+1. Frontend functionality - 3 hours
+2. Frontend presentational aspects (styling, DOM, etc) - 1.5 hours
+3. Required Validations - 1 hour
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Some features in project
 
-## Further help
+1. Pagination
+2. Storing Item along with image and also created date
+3. Editing the existing items
+4. Deleting the existing items
+5. Sorting the items in list shown in table
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Some screenshots
+
+1. List of existing items
+   ![image](https://firebasestorage.googleapis.com/v0/b/shopbridge-34679.appspot.com/o/list-page.png?alt=media&token=3e4c3afc-3e86-4ee3-bba4-425304e807fd)
+
+2. Actions on list items
+   ![image](https://firebasestorage.googleapis.com/v0/b/shopbridge-34679.appspot.com/o/item-actions.png?alt=media&token=5d27b2dc-175d-45fe-a761-24b3978a5da5)
+
+3. Sorting
+   ![image](https://firebasestorage.googleapis.com/v0/b/shopbridge-34679.appspot.com/o/sorting.png?alt=media&token=8fc321d7-327f-4100-991b-2f78f37a3efb)
+
+4. Pagination
+   ![image](https://firebasestorage.googleapis.com/v0/b/shopbridge-34679.appspot.com/o/pagination.png?alt=media&token=1eb1c149-6a4c-47ca-9012-93f88aa124e8)
+
+5. Edit Exsiting item
+   ![image](https://firebasestorage.googleapis.com/v0/b/shopbridge-34679.appspot.com/o/edit-item.png?alt=media&token=676b3d60-6d6b-47b1-ab97-2d7ceb4cbd32)
+
+6. Add the item
+   ![image](https://firebasestorage.googleapis.com/v0/b/shopbridge-34679.appspot.com/o/add-item.png?alt=media&token=82dde610-8419-4c72-9ef1-9074815e5f21)
+
+7. Responsive website <br />
+   ![image](https://firebasestorage.googleapis.com/v0/b/shopbridge-34679.appspot.com/o/responsive-add-page.png?alt=media&token=87b72323-000a-4ebe-a5ec-166b5a74f0b8)
